@@ -31,7 +31,7 @@ class wFragment(
         retrofit = Retrofit
             .Builder()
             .baseUrl("http://api.openweathermap.org/")
-            .addConverterFactory(GsonConverterFactory.create()).
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         interf = retrofit?.create(wInterface::class.java)
