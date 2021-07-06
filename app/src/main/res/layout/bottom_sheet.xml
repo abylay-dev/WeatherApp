@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="20dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_peekHeight="62dp">
+
+    <TextView
+        android:id="@+id/tvCoord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coordination"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:textColor="#FFC107"
+        />
+
+    <TextView
+        android:id="@+id/tvLon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#F0000000"
+        tools:text="Lon: "
+        />
+
+    <TextView
+        android:id="@+id/tvLat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#F0000000"
+        tools:text="Lat: "
+        />
+
+    <TextView
+        android:id="@+id/tvWind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        android:textColor="#FFC107"
+        android:text="Wind"
+        />
+
+    <TextView
+        android:id="@+id/tvWind_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#F0000000"
+        tools:text="Speed: "
+        />
+
+    <TextView
+        android:id="@+id/tvWind_degree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#F0000000"
+        tools:text="degree: "
+        />
+
+    <TextView
+        android:id="@+id/tvdescr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="23sp"
+        android:textStyle="normal"
+        android:textColor="#03A9F4"
+        tools:text="Temperature"
+        />
+
+
+
+
+
+</LinearLayout>
