@@ -13,11 +13,12 @@ import kz.example.weatherapprestapi.network.API_KEY
 import kz.example.weatherapprestapi.network.NetworkSetuper
 import kz.example.weatherapprestapi.network.WeatherApi
 
-class WeatherViewModel: ViewModel() {
+class WeatherViewModel(
+    private val city: String
+): ViewModel() {
+
     private var weather_api: WeatherApi = NetworkSetuper.weatherApi
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
-    private val dataOfWeather = mutableListOf<Weather>()
 
     private val currentWeather: MutableLiveData<Weather> = MutableLiveData()
     fun observeCurrentWeather(): LiveData<Weather> = currentWeather
@@ -32,15 +33,13 @@ class WeatherViewModel: ViewModel() {
     private fun getWeather(){
         isLoading.postValue(true)
         val disposable = Single.fromCallable {
-                Thread.sleep(500L)
-                weather_api.getWeather(R.id.tvCityName.toString(), API_KEY)
+                weather_api.getWeather(city, API_KEY)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
                 //TODO:
-                //dataOfWeather.addAll(it)
-                //currentWeather.postValue(it[0])
+                currentWeather.postValue(it)
                 isLoading.postValue(false)
             }, {
                 isLoading.postValue(false)

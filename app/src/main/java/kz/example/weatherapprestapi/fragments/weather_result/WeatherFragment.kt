@@ -11,43 +11,61 @@ import androidx.fragment.app.viewModels
 import kz.example.weatherapprestapi.R
 import kz.example.weatherapprestapi.models.Weather
 
-class WeatherFragment : Fragment() {
-    private val viewModel: WeatherViewModel by viewModels()
+class WeatherFragment(layoutId: Int) : Fragment(layoutId) {
+
+    //region Companion
+    companion object {
+        private const val CITY = "CITY"
+
+        fun newInstance(city: String): WeatherFragment {
+//            val fragment = WeatherFragment(R.layout.fragment_weather)
+//            val args = Bundle()
+//            args.putString(CITY, city)
+//            fragment.arguments = args
+//            return fragment
+
+            return WeatherFragment(R.layout.fragment_weather).apply {
+                val args = Bundle()
+                args.putString(CITY, city)
+                arguments = args
+            }
+        }
+    }
+    //endregion
+
+    private val viewModel: WeatherViewModel by viewModels() {
+        WeatherViewModelFactory(arguments?.getString(CITY, "") ?: "")
+    }
     private lateinit var progressBar: ProgressBar
     //private var binding =
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_weather, container, false)
-        progressBar = view.findViewById(R.id.progressBar)
-        return view
-    }
-
     private fun bind(weather: Weather) {
-        val city_n: TextView? = null
-        val country_name: TextView? = null
-        val temperature: TextView? = null
-        val feels_like: TextView? = null
-        val pressure: TextView? = null
-        val temp1: Double = Math.round((weather.main_desc.temp - 273.15) * 100.0) / 100.0
-        val temp_f: Double = Math.round((weather.main_desc.feels_like - 273.15) * 100.0) / 100.0
+        with(requireNotNull(view)) {
+            val city_n: TextView? = findViewById(R.id.tvCityName)
+            val country_name: TextView? = findViewById(R.id.tvCountryName)
+            val temperature: TextView? = findViewById(R.id.tvTempDescription)
+            val feels_like: TextView? = findViewById(R.id.tvFeelslike)
+            val pressure: TextView? = findViewById(R.id.tvPressure)
 
-        city_n!!.text = weather.name
-        country_name!!.text = weather.sys_desc.country
-        /*       coord_lon!!.text = "Lon: ${weather.cord.lon}"
-               coord_lat!!.text = "Lon: ${weather.cord.lat}"*/
-        temperature!!.text = temp1.toString()
-        feels_like!!.text = "Feels like: $temp_f"
-        pressure!!.text = "Pressure: ${weather.main_desc.pressure}"
-        /*wind_speed!!.text = "Speed: ${weather.wind_desc.speed}"
-        wind_degree!!.text = "Degree: ${weather.wind_desc.degree}"
-        desciption_weather!!.text = weather.weather_desc.get(0).descr*/
+            val temp1: Double = Math.round((weather.main_desc.temp - 273.15) * 100.0) / 100.0
+            val temp_f: Double = Math.round((weather.main_desc.feels_like - 273.15) * 100.0) / 100.0
+
+            city_n!!.text = weather.name
+            country_name!!.text = weather.sys_desc.country
+            /*       coord_lon!!.text = "Lon: ${weather.cord.lon}"
+                   coord_lat!!.text = "Lon: ${weather.cord.lat}"*/
+            temperature!!.text = temp1.toString()
+            feels_like!!.text = "Feels like: $temp_f"
+            pressure!!.text = "Pressure: ${weather.main_desc.pressure}"
+            /*wind_speed!!.text = "Speed: ${weather.wind_desc.speed}"
+            wind_degree!!.text = "Degree: ${weather.wind_desc.degree}"
+            desciption_weather!!.text = weather.weather_desc.get(0).descr*/
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        progressBar = view.findViewById(R.id.progressBar)
         viewModel.observeIsLoadingState()
             .observe(this.viewLifecycleOwner, {
                 if (it == true) {
