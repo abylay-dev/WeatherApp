@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kz.example.weatherapprestapi.fragments.weather_result.WeatherFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val button = findViewById<Button>(R.id.button)
-        button.setOnClickListener{
-            val editText = findViewById<EditText>(R.id.editText).text.toString()
+        button.setOnClickListener {
+            val city = findViewById<EditText>(R.id.editText).text.toString()
 
             /*val llBottomSheet = findViewById<View>(R.id.bottom_sheet) as LinearLayout
 
@@ -41,19 +41,16 @@ class MainActivity : AppCompatActivity() {
 // настройка возможности скрыть элемент при свайпе вниз
             bottomSheetBehavior.isHideable = false*/
 
-            showFragment(editText)
+            showFragment(city)
         }
-
-
-
     }
 
-    private fun showFragment(text:String){
-        val fragment = wFragment()
+    private fun showFragment(city: String) {
+        val fragment = WeatherFragment.newInstance(city)
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
-            .replace(R.id.fragmentLayout, fragment, "Fragment")
+            .replace(R.id.fragmentContainer, fragment, "Fragment")
             .commit()
     }
 }
