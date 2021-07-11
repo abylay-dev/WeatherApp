@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import kz.example.weatherapprestapi.models.Weather
-import kz.example.weatherapprestapi.network.API_KEY
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 

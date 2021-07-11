@@ -1,7 +1,5 @@
 package kz.example.weatherapprestapi
 
-import android.util.Log
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +8,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kz.example.weatherapprestapi.models.Weather
-import kz.example.weatherapprestapi.network.API_KEY
 import kz.example.weatherapprestapi.network.NetworkSetuper
 
 class WeatherViewModel: ViewModel() {
@@ -33,7 +30,7 @@ class WeatherViewModel: ViewModel() {
         isLoading.postValue(true)
         val disposable = Single.fromCallable {
                 Thread.sleep(500L)
-                weather_api.getWeather(R.id.tvCityName.toString(), API_KEY)
+                weather_api.getWeather(R.id.tvCityName.toString(), BuildConfig.WEATHER_API_KEY)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
