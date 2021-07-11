@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kz.example.weatherapprestapi.fragments.weather_result.WeatherFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,17 +43,14 @@ class MainActivity : AppCompatActivity() {
 
             showFragment(editText)
         }
-
-
-
     }
 
     private fun showFragment(text:String){
-        val fragment = wFragment()
+        val fragment = WeatherFragment()
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
-            .replace(R.id.fragmentLayout, fragment, "Fragment")
+            .replace(R.id.fragmentContainer, fragment, "Fragment")
             .commit()
     }
 }

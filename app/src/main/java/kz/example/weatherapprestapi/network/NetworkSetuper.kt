@@ -1,7 +1,6 @@
 package kz.example.weatherapprestapi.network
 
 import com.jaredsburrows.retrofit2.adapter.synchronous.SynchronousCallAdapterFactory
-import kz.example.weatherapprestapi.wInterface
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,5 +20,5 @@ object NetworkSetuper {
         .addCallAdapterFactory(SynchronousCallAdapterFactory.create())
         .build()
 
-    val weatherApi: wInterface = retrofit.create(wInterface::class.java)
+    val weatherApi: WeatherApi = retrofit.create(WeatherApi::class.java)
 }

@@ -1,7 +1,5 @@
-package kz.example.weatherapprestapi
+package kz.example.weatherapprestapi.fragments.weather_result
 
-import android.util.Log
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +7,14 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kz.example.weatherapprestapi.R
 import kz.example.weatherapprestapi.models.Weather
 import kz.example.weatherapprestapi.network.API_KEY
 import kz.example.weatherapprestapi.network.NetworkSetuper
+import kz.example.weatherapprestapi.network.WeatherApi
 
 class WeatherViewModel: ViewModel() {
-    private var weather_api: wInterface = NetworkSetuper.weatherApi
+    private var weather_api: WeatherApi = NetworkSetuper.weatherApi
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     private val dataOfWeather = mutableListOf<Weather>()
